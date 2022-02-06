@@ -5,7 +5,6 @@ import styles from 'styles/Home.module.css';
 import HomeView from 'views/HomeView';
 import SearchedResults from 'views/SearchedResults';
 
-
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>

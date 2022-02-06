@@ -32,9 +32,9 @@ class Item {
       condition,
       id,
       price,
-      shipping,
       thumbnail,
       title,
+      shipping: shipping.free_shipping,
       sellerAddress: obj.seller_address,
       soldQuantity: obj.sold_quantity,
     });

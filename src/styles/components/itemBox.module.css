@@ -1,0 +1,52 @@
+.mainContainer {
+    display: flex;
+}
+
+.subcontainer{
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    align-self: center;
+    margin: 16px;
+}
+
+.middlecontainer {
+    width: 50%;
+}
+
+.LastContainer {
+    width: 25%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.title{
+    color: #333333;
+    font-size: 18px;
+    margin: 0;
+}
+
+.amountContainer{
+    display: flex;
+    align-items: center;
+}
+
+.logo{
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.amount{
+    color: #333333;
+    font-size: 24px;
+    margin-bottom: 32px;
+    margin-top: 20px;
+}
+
+.state{
+    color: #333333;
+    font-size: 12px;
+    margin-bottom: 32px;
+    margin-top: 20px;
+}

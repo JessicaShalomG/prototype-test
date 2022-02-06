@@ -1,7 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
-import useSWR from 'swr';
+import useSWRImmutable from 'swr/immutable';
 
 import { useAppDispatch, useAppSelector } from 'hooks';
 import Item from 'models/dataModel';
@@ -26,7 +26,7 @@ const SearchBox = (): JSX.Element => {
     });
 
   const apiUrl = `https://api.mercadolibre.com/sites/MLA/search?q=${word}`;
-  useSWR(shouldFetch ? apiUrl : null, fetcher);
+  useSWRImmutable(shouldFetch ? apiUrl : null, fetcher);
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
