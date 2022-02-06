@@ -2,7 +2,9 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 
 import styles from 'styles/Home.module.css';
-import SearchView from 'views/SearchView';
+import HomeView from 'views/HomeView';
+import SearchedResults from 'views/SearchedResults';
+
 
 const Home: NextPage = () => {
   return (
@@ -13,7 +15,8 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <SearchView />
+        <HomeView />
+        <SearchedResults />
       </main>
     </div>
   );

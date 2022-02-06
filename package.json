@@ -1,6 +1,6 @@
 {
   "name": "prototype-test",
-  "private": false,
+  "private": true,
   "scripts": {
     "build": "next build",
     "dev": "next dev",
@@ -9,13 +9,17 @@
     "lint": "prettier --check . && next lint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.7.1",
     "next": "12.0.8",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-redux": "^7.2.6",
+    "redux-logger": "^3.0.6"
   },
   "devDependencies": {
     "@types/node": "17.0.9",
     "@types/react": "17.0.38",
+    "@types/redux-logger": "^3.0.9",
     "axios": "^0.25.0",
     "eslint": "8.7.0",
     "eslint-config-next": "12.0.8",

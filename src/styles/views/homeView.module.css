@@ -1,0 +1,13 @@
+.homeViewCointer{
+    width: 100%;
+    background-color: #FFE600;
+    display: flex;
+    justify-content: center;
+    padding: 1.5% 15%;
+}
+
+.subcontainer{
+    display: flex;
+    align-self: center;
+    width: 100%;
+}

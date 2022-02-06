@@ -14,7 +14,13 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "paths": {
+      "hooks": ["redux/hooks/index.ts"],
+      "reducers/*": ["redux/reducers/*"],
+      "selectors": ["redux/selectors/index.ts"],
+      "store": ["redux/store/index.ts"]
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

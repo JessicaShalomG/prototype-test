@@ -1,15 +1,9 @@
-.mainBox {
-    
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 10%;
-    width: 100%;
-    background-color: #FFE600;
-}
-
-.searchBox {
+.searchBox{
+    width: inherit;
+    margin-left: 7%;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    align-self: center;
+    display: flex;
 }
 
 .magnifyingGlass {
@@ -24,15 +18,14 @@
     font-size: 18px;
     border-radius: 4px 0px 0px 4px;
     color: #333333;
-    width: 50%;
     float: left;
     border-left: none;
+    flex-grow: 1;
 }
 
 
 .searchBox button {
     float: left;
-    width: 4%;
     padding: 10px;
     background: #EEEEEE;
     color: white;

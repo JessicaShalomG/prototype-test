@@ -1,62 +1,68 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
+import axios from 'axios';
 import Image from 'next/image';
 import useSWR from 'swr';
 
+import { useAppDispatch, useAppSelector } from 'hooks';
 import Item from 'models/dataModel';
-import styles from 'styles/views/searchBox.module.css';
-type PropTypes = {
-  setter: React.Dispatch<React.SetStateAction<Item[]>>;
-};
+import { persistFilteredItems, persistSearchedWord } from 'reducers/session';
+import { selectWord } from 'selectors';
+import styles from 'styles/components/searchBox.module.css';
 
-const SearchBox = ({ setter }: PropTypes): JSX.Element => {
-  const [searchWord, setSearchWord] = useState<string>('');
+const SearchBox = (): JSX.Element => {
+  const searchWordRef = useRef<HTMLInputElement>(null);
+  const [shouldFetch, setShouldFetch] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
+  const word = useAppSelector<string>(selectWord);
 
-  const fetcher = (url: string) => fetch(url).then((res) => res.json());
+  const fetcher = (url: string) =>
+    axios.get(url).then((res) => {
+      const resp = res.data;
+      const processedItems = resp.results.map((item: Item) =>
+        Item.fromJson(item),
+      );
+      const firstFourItems = processedItems.slice(0, 4);
+      dispatch(persistFilteredItems(firstFourItems));
+    });
 
-  const AvailableData = () => {
-    const searchedWord = searchWord.trim().toLocaleLowerCase();
-    const apiUrl = `https://api.mercadolibre.com/sites/MLA/search?q=${searchedWord}`;
-    const { data, error } = useSWR(apiUrl, fetcher);
-    if (error) return <div>failed to load</div>;
-    if (!data) return <div>loading...</div>;
-    const processedItems = data.results.map((item: Item) =>
-      Item.fromJson(item),
-    );
-    setter(processedItems);
+  const apiUrl = `https://api.mercadolibre.com/sites/MLA/search?q=${word}`;
+  useSWR(shouldFetch ? apiUrl : null, fetcher);
 
-    console.log(data.results);
-    console.log(processedItems);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setSearchWord(e.target.value);
+    searchUpdate();
+    setShouldFetch(true);
   };
+
+  const searchUpdate = useCallback(() => {
+    const rawWord = searchWordRef.current!.value;
+    const cleanedWord = rawWord.trim().toLocaleLowerCase();
+    dispatch(persistSearchedWord(cleanedWord));
+  }, [searchWordRef, dispatch]);
 
   return (
-    <>
-      <div className={styles.searchBox}>
-        <input
-          autoComplete="off"
-          autoCapitalize="off"
-          autoCorrect="off"
-          placeholder="Nunca dejes de buscar"
-          spellCheck="false"
-          type="text"
-          maxLength={150}
-          value={searchWord}
-          onChange={handleChange}
+    <div className={styles.searchBox}>
+      <input
+        ref={searchWordRef}
+        autoComplete="off"
+        autoCapitalize="off"
+        autoCorrect="off"
+        placeholder="Nunca dejes de buscar"
+        spellCheck="false"
+        type="text"
+        maxLength={150}
+        defaultValue={word}
+      />
+      <button type="submit" onClick={handleSubmit}>
+        <Image
+          src="/images/search.png"
+          height={16}
+          width={16}
+          className={styles.magnifyingGlass}
+          alt={'search icon'}
         />
-        <button type="submit">
-          <Image
-            src="/images/search.png"
-            height={16}
-            width={16}
-            className={styles.magnifyingGlass}
-          />
-        </button>
-      </div>
-    </>
+      </button>
+    </div>
   );
 };
 
