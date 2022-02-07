@@ -68,7 +68,7 @@
 1. ​`​“/”` 
    This is the main/home page that renders the search box (allows you to type in a product name in a serch box and trigger search when you click on the search icon 🔍)
 2. `​“/items?search={product-to-look-for}”` 
-    This will render the result view with the first four itmes found related to the word that you typed to search for (for the breadcrum i used the name of the category with the most occurrences, but i did not undestand where to get the rest of the info from and i did not reach out since I worked on it during the weekend and today wich im not sure in your country but is a holliday in México)
+    This will render the result view with the first four itmes found related to the word that you typed to search for (for the breadcrum i used the name of the category with the most occurrences, but i did not undestand where to get the rest of the info from and i did not reach out since I worked on it during the weekend and today wich im not sure in your country but it is a holliday in México)
 3. `​“/items/{product-id}”` 
     Displays the details of the product related to the id you provided(I did not undertand alot where to get the info for the breandcrum  in this part 😖)
 
