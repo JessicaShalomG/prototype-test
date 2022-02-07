@@ -52,6 +52,7 @@
 - `models`: Models to hold and format json responses data obtained from API requests.
 - `pages`: Each page is associated with a route based on its file name (quoted from NextJs documentation).
 - `redux`: Holds files needed for redux like selectors, reducers store and redux hooks to help keep a global state and make code cleaner.
+- `styles`: Holds all style sheets for components and views
 - `views`: Main Views components for each page.
 
 
