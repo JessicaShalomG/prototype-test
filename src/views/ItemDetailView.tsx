@@ -8,23 +8,29 @@ import style from 'styles/pages/items.module.css';
 
 const ItemDetailView = ({ queryId }: { queryId: string }): JSX.Element => {
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
+  const [product, setProduct] = useState<ItemDetailModel>();
 
   useEffect(() => {
     if (queryId) {
       setShouldFetch(true);
     }
-  }, [queryId]);
+  }, [queryId, product]);
 
   const apiUrl = `https://api.mercadolibre.com/items/${queryId}`;
+  const detailUrl = `https://api.mercadolibre.com/items/${queryId}/description`;
 
-  const fetcher = (url: string) =>
-    axios.get(url).then((res) => {
-      console.log('el fetcher');
-      const resp = res.data;
-      return ItemDetailModel.fromJson(resp);
+  const fetcher = (url: string) => {
+    axios.get(url, { parseItem: true }).then((response: any) => {
+      let resp = ItemDetailModel.fromJson(response.item);
+      axios.get(detailUrl).then((response2: any) => {
+        const { plain_text } = response2.data;
+        resp.description = plain_text;
+        setProduct(resp);
+      });
     });
+  };
 
-  const { data, error } = useSWRImmutable(shouldFetch ? apiUrl : null, fetcher);
+  const { error } = useSWRImmutable(shouldFetch ? apiUrl : null, fetcher);
 
   if (error) {
     return (
@@ -33,10 +39,11 @@ const ItemDetailView = ({ queryId }: { queryId: string }): JSX.Element => {
       </div>
     );
   }
-  if (!data) {
+
+  if (!product) {
     return (
       <div className={style.error}>
-        <h1>loading...</h1>
+        <h1>....Loading.....</h1>
       </div>
     );
   }
@@ -44,12 +51,12 @@ const ItemDetailView = ({ queryId }: { queryId: string }): JSX.Element => {
   return (
     <div className={style.mainContainer}>
       <ItemDetail
-        condition={data.condition}
-        description={data.warranty}
-        price={data.price}
-        sold={data.sold}
-        imageUrl={data.thumbnail}
-        title={data.title}
+        condition={product.condition}
+        description={product.description}
+        price={product.price}
+        sold={product.sold}
+        imageUrl={product.picture}
+        title={product.title}
       />
     </div>
   );

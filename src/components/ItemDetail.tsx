@@ -4,10 +4,12 @@ import Image from 'next/image';
 import { capitalize, localValue } from 'helperFunctions/helpers';
 import styles from 'styles/components/itemDetail.module.css';
 
+type currency = { amount: number };
+
 type Props = {
   condition: string;
   description: string;
-  price: number;
+  price: currency;
   sold: number;
   imageUrl: string;
   title: string;
@@ -21,6 +23,9 @@ const ItemDetail = ({
   imageUrl,
   title,
 }: Props): JSX.Element => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+    alert(`You have successfully added ${title} to the shooping car :)`);
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.subcontainer}>
@@ -35,8 +40,10 @@ const ItemDetail = ({
           condition,
         )} - ${sold} vendidos`}</p>
         <p className={styles.title}>{title}</p>
-        <p className={styles.amount}>{localValue(price / 100)}</p>
-        <button className={styles.buyButton}>Comprar</button>
+        <p className={styles.amount}>{localValue(price?.amount / 100)}</p>
+        <button className={styles.buyButton} onClick={handleClick}>
+          Comprar
+        </button>
       </div>
     </div>
   );

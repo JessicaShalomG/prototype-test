@@ -24,9 +24,9 @@ const SearchBox = (): JSX.Element => {
   }, [triggerSerach]);
 
   const fetcher = (url: string) =>
-    axios.get(url).then((res) => {
+    axios.get(url).then((res: any) => {
       const resp = res.data;
-      const processedItems = resp.results.map((item: Item) =>
+      const processedItems = resp.results.map((item: any) =>
         Item.fromJson(item),
       );
       const firstFourItems = processedItems.slice(0, 4);

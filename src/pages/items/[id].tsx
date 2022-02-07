@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import ItemDetailView from 'views/ItemDetailView';
 
 const GetSelectedItem = (): JSX.Element => {
-  console.log('esto esss');
   const { query } = useRouter();
 
   useEffect(() => {}, [query]);

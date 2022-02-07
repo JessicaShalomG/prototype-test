@@ -1,31 +1,62 @@
 import BaseItem from './baseItem';
 
 class ItemDetailModel extends BaseItem {
-  constructor({ condition, id, price, sold, thumbnail, title, warranty }) {
-    super({ id, price, thumbnail, title });
+  constructor({ condition, description, id, price, picture, sold, title }) {
+    super({ id, price, picture, title });
     this.condition = condition;
     this.sold = sold;
-    this.warranty = warranty;
+    this.description = description;
   }
 
   static fromJson = ({
     condition,
+    description,
     id,
     price,
-    thumbnail,
+    picture,
     title,
-    warranty,
     ...obj
   }) =>
     new ItemDetailModel({
       condition,
+      description,
       id,
       price,
-      thumbnail,
+      picture,
       title,
-      warranty,
       sold: obj.sold_quantity,
     });
+
+  static toCustomResponse({
+    condition,
+    id,
+    price,
+    shipping,
+    thumbnail,
+    title,
+    ...obj
+  }) {
+    return {
+      author: {
+        name: 'Jessica',
+        lastname: 'Gonzalez',
+      },
+      item: {
+        id: id,
+        title: title,
+        price: {
+          currency: obj.currency_id,
+          amount: price,
+          decimals: obj.base_price,
+        },
+        picture: thumbnail,
+        condition: condition,
+        free_shipping: shipping.free_shipping,
+        sold_quantity: obj.sold_quantity,
+        description: '',
+      },
+    };
+  }
 }
 
 export default ItemDetailModel;

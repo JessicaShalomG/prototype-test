@@ -1,8 +1,8 @@
 class BaseItem {
-  constructor({ id, price, thumbnail, title }) {
+  constructor({ id, picture, price, title }) {
     this.id = id;
+    this.picture = picture;
     this.price = price;
-    this.thumbnail = thumbnail;
     this.title = title;
   }
 }
