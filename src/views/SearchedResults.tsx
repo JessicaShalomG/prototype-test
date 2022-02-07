@@ -1,40 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 import ItemBox from 'components/ItemBox';
+import { maxCategoriesType } from 'helperFunctions/helpers';
 import { useAppSelector } from 'hooks';
-import { selectItems } from 'selectors';
+import Item from 'models/dataModel';
+import { selectCategories, selectItems } from 'selectors';
 import style from 'styles/views/searchedResults.module.css';
 
 const SearchedResults = () => {
-  const FilteredItems = useAppSelector(selectItems);
+  const filteredItems = useAppSelector(selectItems);
+  const categories = useAppSelector(selectCategories);
+  const [categoryName, setCategoryName] = useState<string>('');
 
-  const items = FilteredItems.map((item, index) => {
-    const {
-      state: { name },
-    } = item.sellerAddress;
+  useEffect(() => {
+    const categoryId = maxCategoriesType(categories);
+    const url = `https://api.mercadolibre.com/categories/${categoryId}`;
+    const getCategoryName = async () => {
+      const { data } = await axios.get(url);
+      setCategoryName(data.name);
+    };
+    if (categoryId) getCategoryName();
+  }, [categories]);
 
+  const items = filteredItems.map((item: any, index: number) => {
+    const formatedItem: Item = Item.fromJson(item);
+    const { name } = formatedItem.sellerAddress;
+    const { amount } = formatedItem.price;
     return (
-      <div className={style.itemContainer} key={item.id}>
+      <div className={style.itemContainer} key={formatedItem.id}>
         <ItemBox
           address={name}
-          freeShipping={item.shipping}
-          id={item.id}
-          imageUrl={item.thumbnail}
-          price={item.price}
-          title={item.title}
+          freeShipping={formatedItem.shipping}
+          id={formatedItem.id}
+          imageUrl={formatedItem.picture}
+          price={amount}
+          title={formatedItem.title}
         />
-        {index < FilteredItems.length - 1 && <hr className={style.line} />}
+        {index < filteredItems.length - 1 && <hr className={style.line} />}
       </div>
     );
   });
 
   return (
     <div className={style.mainContainer}>
+      <p className={style.categoryName}>{categoryName}</p>
       <div className={style.subcontainer}>{items}</div>
     </div>
   );
 };
 
 export default SearchedResults;
-
-//MLA1055

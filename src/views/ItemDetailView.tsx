@@ -50,6 +50,7 @@ const ItemDetailView = ({ queryId }: { queryId: string }): JSX.Element => {
 
   return (
     <div className={style.mainContainer}>
+      <p className={style.categoryName}>Detalle de producto</p>
       <ItemDetail
         condition={product.condition}
         description={product.description}

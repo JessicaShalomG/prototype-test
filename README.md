@@ -36,6 +36,7 @@
     .
     ├── public
     ├── src
+        ├── axios
         ├── components
         ├── helperFunctions
         ├── models
@@ -47,6 +48,7 @@
 
 - `public`: Static files and Images.
 - `src`: Base code of the project.
+- `axios`: axios interceptors.
 - `components`: Components used for the views.
 - `helperFunctions`: Functions that are shared to standarize code or style.
 - `models`: Models to hold and format json responses data obtained from API requests.
@@ -59,7 +61,7 @@
 ## 🧪 Description
   I decided to use NextJs for this prototype test because it comes already configured with the basic things to start developing, suports typescript already. It reduces loading page time and user can see content faster, that also improves performance.
 
-  I used Typescript to reduce errors and also redux to maintain a global state and manipulate it from diff views instead of having to pass props around and also to make it cleaner, for the requests i decided to use axios because its friendly and wors well with react. I am also using a hook provided by Next js along with axios useSWRImmutable because is also ready for typescript, it is fast and uses cache. This desitions were taken based on performance and improve user experience.
+  I used Typescript to reduce errors and also redux to maintain a global state and manipulate it from diff views instead of having to pass props around and also to make it cleaner, for the requests i decided to use axios because its friendly and works well with react, also to make use of axios interceptors on requests and modify the response from the API to obtain desired responce with author signature and only relevant data to be used( one of the requirements). I am also using a hook provided by Next js along with axios useSWRImmutable because is also ready for typescript, it is fast and uses cache. This desitions were taken based on performance and improve user experience.
 
 ## ⭐️ Pages
 

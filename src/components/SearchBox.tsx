@@ -6,8 +6,11 @@ import useSWRImmutable from 'swr/immutable';
 
 import { cleanWord } from 'helperFunctions/helpers';
 import { useAppDispatch, useAppSelector } from 'hooks';
-import Item from 'models/dataModel';
-import { persistFilteredItems, persistSearchedWord } from 'reducers/session';
+import {
+  persistsFilteredCategories,
+  persistFilteredItems,
+  persistSearchedWord,
+} from 'reducers/session';
 import { selectTriggerSearch, selectWord } from 'selectors';
 import styles from 'styles/components/searchBox.module.css';
 
@@ -24,13 +27,9 @@ const SearchBox = (): JSX.Element => {
   }, [triggerSerach]);
 
   const fetcher = (url: string) =>
-    axios.get(url).then((res: any) => {
-      const resp = res.data;
-      const processedItems = resp.results.map((item: any) =>
-        Item.fromJson(item),
-      );
-      const firstFourItems = processedItems.slice(0, 4);
-      dispatch(persistFilteredItems(firstFourItems));
+    axios.get(url, { parseData: true }).then((resp: any) => {
+      dispatch(persistsFilteredCategories(resp.categories));
+      dispatch(persistFilteredItems(resp.items));
     });
 
   const apiUrl = `https://api.mercadolibre.com/sites/MLA/search?q=${word}`;

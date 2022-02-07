@@ -1,18 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
 import styles from 'styles/Home.module.css';
 
 const Home: NextPage = () => {
-  useEffect(() => {
-    document.getElementById('__next')!.classList.add('nextPage');
-
-    return () => {
-      document.getElementById('__next')!.classList.remove('nextPage');
-    };
-  }, []);
-
   return (
     <div className={styles.container}>
       <Head>

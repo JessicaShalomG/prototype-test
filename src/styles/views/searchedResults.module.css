@@ -18,3 +18,12 @@
     width: 95%;
     margin: 0px;
 }
+
+.categoryName{
+    font-size: 14px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    color: #999999;
+    align-self: flex-start;
+    margin-left: 15%;
+}

@@ -9,7 +9,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 5%;
     padding-bottom: 5%;
     height: 100%;
+}
+
+.categoryName{
+    font-size: 14px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    color: #999999;
+    align-self: flex-start;
+    margin-left: 15%;
 }
