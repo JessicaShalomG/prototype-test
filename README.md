@@ -45,14 +45,14 @@
         ├── views
 ```
 
-    - **`public`:** Static files and Images.
-    - **`src`:** Base code of the project.
-    - **`components`:** Components used for the views.
-    - **`helperFunctions`:** Functions that are shared to standarize code or style.
-    - **`models`:** Models to hold and format json responses data obtained from API requests.
-    - **`pages`:** Each page is associated with a route based on its file name (quoted from NextJs documentation).
-    - **`redux`:** Holds files needed for redux like selectors, reducers store and redux hooks to help keep a global state and make code cleaner.
-    - **`views`:** Main Views components for each page.
+- `public`: Static files and Images.
+- `src`: Base code of the project.
+- `components`: Components used for the views.
+- `helperFunctions`: Functions that are shared to standarize code or style.
+- `models`: Models to hold and format json responses data obtained from API requests.
+- `pages`: Each page is associated with a route based on its file name (quoted from NextJs documentation).
+- `redux`: Holds files needed for redux like selectors, reducers store and redux hooks to help keep a global state and make code cleaner.
+- `views`: Main Views components for each page.
 
 
 ## 🧪 Description
