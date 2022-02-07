@@ -1,8 +1,5 @@
-<p align="center">
-    <img alt="image logo" src="https://github.com/JessicaShalomG/prototype-test/blob/main/image.jpg?raw=true" />
-</p>
 <h1 align="center">
-   Prototype Test
+   Prototype Test 📖 
 </h1>
 
 `Prototype-test` is created with [Next Js](https://nextjs.org/docs/api-reference/create-next-app) comand `yarn create next-app --typescript` that creates a basic proyect using typescript
@@ -66,7 +63,7 @@
 ## ⭐️ Pages
 
 1. ​`​“/”` 
-   This is the main/home page that renders the search box (allows you to type in a product name in a serch box and trigger search when you click on the search icon )
+   This is the main/home page that renders the search box (allows you to type in a product name in a serch box and trigger search when you click on the search icon 🔍)
 2. `​“/items?search={product-to-look-for}”` 
     This will render the result view with the first four itmes found related to the word that you typed to search for
 3. `​“/items/{product-id}”` 
