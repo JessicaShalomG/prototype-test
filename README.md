@@ -1,34 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center">
+    <img alt="image logo" src="https://github.com/JessicaShalomG/prototype-test/blob/main/image.jpg?raw=true" />
+</p>
+<h1 align="center">
+   Prototype Test
+</h1>
 
-## Getting Started
+`Prototype-test` is created with [Next Js](https://nextjs.org/docs/api-reference/create-next-app) comand `yarn create next-app --typescript` that creates a basic proyect using typescript
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
+## 💾 Requirements
+
+- [Node.js 12.22.0 or later](https://nodejs.org/en/)
+
+## ☕️ Install and develop
+
+1. Use the `yarn` to install all the requirements 
+
+    ```bash
+    yarn # This installs all dev requirements.
+    ```
+
+    You can explore the other commands on the file to improve your developing experience.
+
+2. Develop - use the `yarn dev` command to start the development server and start the proyect locally, will normally start running on http://localhost:3000
+
+    ```bash
+    yarn dev # This run proyect on local 
+    ```
+
+3. Use `yarn format`  to format and make code with better style ( there is a file for .prettierrc.json where you can configure options) uses [Prettier](https://prettier.io/docs/en/index.html)
+
+    ```bash
+    yarn format # will format files using prettier
+    ```
+
+## 🗂 Structure (WIP)
+```
+    .
+    ├── public
+    ├── src
+        ├── components
+        ├── helperFunctions
+        ├── models
+        ├── pages
+        ├── redux
+        ├── styles
+        ├── views
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    - **`public`:** Static files and Images.
+    - **`src`:** Base code of the project.
+    - **`components`:** Components used for the views.
+    - **`helperFunctions`:** Functions that are shared to standarize code or style.
+    - **`models`:** Models to hold and format json responses data obtained from API requests.
+    - **`pages`:** Each page is associated with a route based on its file name (quoted from NextJs documentation).
+    - **`redux`:** Holds files needed for redux like selectors, reducers store and redux hooks to help keep a global state and make code cleaner.
+    - **`views`:** Main Views components for each page.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## 🧪 Description
+  I decided to use NextJs for this prototype test because it comes already configured with the basic things to start developing, suports typescript already. It reduces loading page time and user can see content faster, that also improves performance.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+  I used Typescript to reduce errors and also redux to maintain a global state and manipulate it from diff views instead of having to pass props around and also to make it cleaner, for the requests i decided to use axios because its friendly and wors well with react. I am also using a hook provided by Next js along with axios useSWRImmutable because is also ready for typescript, it is fast and uses cache. This desitions were taken based on performance and improve user experience.
 
-## Learn More
+## ⭐️ Pages
 
-To learn more about Next.js, take a look at the following resources:
+1. ​`​“/”` 
+   This is the main/home page that renders the search box (allows you to type in a product name in a serch box and trigger search when you click on the search icon )
+2. `​“/items?search={product-to-look-for}”` 
+    This will render the result view with the first four itmes found related to the word that you typed to search for
+3. `​“/items/{product-id}”` 
+    Displays the details of the product related to the id you provided
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
