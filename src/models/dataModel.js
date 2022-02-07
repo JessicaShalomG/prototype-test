@@ -1,42 +1,20 @@
-class Item {
-  constructor({
-    condition,
-    id,
-    price,
-    sellerAddress,
-    shipping,
-    soldQuantity,
-    thumbnail,
-    title,
-  }) {
-    this.condition = condition;
-    this.id = id;
-    this.price = price;
+import BaseItem from './baseItem';
+
+class Item extends BaseItem {
+  constructor({ id, price, sellerAddress, shipping, thumbnail, title }) {
+    super({ id, price, thumbnail, title });
     this.sellerAddress = sellerAddress;
     this.shipping = shipping;
-    this.soldQuantity = soldQuantity;
-    this.thumbnail = thumbnail;
-    this.title = title;
   }
 
-  static fromJson = ({
-    condition,
-    id,
-    price,
-    shipping,
-    thumbnail,
-    title,
-    ...obj
-  }) =>
+  static fromJson = ({ id, price, shipping, thumbnail, title, ...obj }) =>
     new Item({
-      condition,
       id,
       price,
       thumbnail,
       title,
       shipping: shipping.free_shipping,
       sellerAddress: obj.seller_address,
-      soldQuantity: obj.sold_quantity,
     });
 }
 

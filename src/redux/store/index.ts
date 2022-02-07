@@ -1,4 +1,4 @@
-import { MiddlewareArray, configureStore } from '@reduxjs/toolkit';
+import { configureStore, MiddlewareArray } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 
 import sessionReducer from 'reducers/session';

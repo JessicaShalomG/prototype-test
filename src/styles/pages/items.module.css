@@ -1,20 +1,15 @@
+.error{
+    display: flex;
+    justify-content: center;
+}
+
 .mainContainer {
     background-color: #EEEEEE;;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 5%;
     padding-bottom: 5%;
-}
-
-.subcontainer{
-    background-color: white;
-    width: 70%;
-}
-
-
-.line{
-    border: 1px solid #EEEEEE;
-    width: 95%;
-    margin: 0px;
+    height: 100%;
 }

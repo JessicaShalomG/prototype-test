@@ -1,29 +1,38 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import Item from 'models/dataModel';
 
 interface SearchState {
-  word: string;
   filteredItems: Item[];
+  triggerSearch: boolean;
+  word: string;
 }
 
-const initialState = { word: '', filteredItems: [] } as SearchState;
+const initialState = {
+  filteredItems: [],
+  triggerSearch: false,
+  word: '',
+} as SearchState;
 
 const sessionSlice = createSlice({
   name: 'session',
   initialState,
   reducers: {
+    persistFilteredItems(state, action: PayloadAction<Item[]>) {
+      state.filteredItems = action.payload;
+    },
     persistSearchedWord(state, action: PayloadAction<string>) {
       state.word = action.payload;
     },
-
-    persistFilteredItems(state, action: PayloadAction<Item[]>) {
-      console.log(action);
-      state.filteredItems = action.payload;
+    persistTriggerSearch(state, action: PayloadAction<boolean>) {
+      state.triggerSearch = action.payload;
     },
   },
 });
 
-export const { persistSearchedWord, persistFilteredItems } =
-  sessionSlice.actions;
+export const {
+  persistFilteredItems,
+  persistSearchedWord,
+  persistTriggerSearch,
+} = sessionSlice.actions;
 export default sessionSlice.reducer;

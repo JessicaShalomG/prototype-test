@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ItemBox from 'components/itemBox';
+import ItemBox from 'components/ItemBox';
 import { useAppSelector } from 'hooks';
 import { selectItems } from 'selectors';
 import style from 'styles/views/searchedResults.module.css';
@@ -12,6 +12,7 @@ const SearchedResults = () => {
     const {
       state: { name },
     } = item.sellerAddress;
+
     return (
       <div className={style.itemContainer} key={item.id}>
         <ItemBox

@@ -1,19 +1,27 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import useSWRImmutable from 'swr/immutable';
 
+import { cleanWord } from 'helperFunctions/helpers';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import Item from 'models/dataModel';
 import { persistFilteredItems, persistSearchedWord } from 'reducers/session';
-import { selectWord } from 'selectors';
+import { selectTriggerSearch, selectWord } from 'selectors';
 import styles from 'styles/components/searchBox.module.css';
 
 const SearchBox = (): JSX.Element => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
   const searchWordRef = useRef<HTMLInputElement>(null);
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
-  const dispatch = useAppDispatch();
+  const triggerSerach = useAppSelector<boolean>(selectTriggerSearch);
   const word = useAppSelector<string>(selectWord);
+
+  useEffect(() => {
+    setShouldFetch(triggerSerach);
+  }, [triggerSerach]);
 
   const fetcher = (url: string) =>
     axios.get(url).then((res) => {
@@ -28,17 +36,17 @@ const SearchBox = (): JSX.Element => {
   const apiUrl = `https://api.mercadolibre.com/sites/MLA/search?q=${word}`;
   useSWRImmutable(shouldFetch ? apiUrl : null, fetcher);
 
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     searchUpdate();
-    setShouldFetch(true);
+    const word = searchWordRef.current!.value;
+    router.push(`/items?search=${cleanWord(word)}`);
   };
 
   const searchUpdate = useCallback(() => {
     const rawWord = searchWordRef.current!.value;
-    const cleanedWord = rawWord.trim().toLocaleLowerCase();
-    dispatch(persistSearchedWord(cleanedWord));
-  }, [searchWordRef, dispatch]);
+    dispatch(persistSearchedWord(cleanWord(rawWord)));
+  }, [dispatch, searchWordRef]);
 
   return (
     <div className={styles.searchBox}>
@@ -53,7 +61,7 @@ const SearchBox = (): JSX.Element => {
         maxLength={150}
         defaultValue={word}
       />
-      <button type="submit" onClick={handleSubmit}>
+      <button type="submit" onClick={handleClick}>
         <Image
           src="/images/search.png"
           height={16}

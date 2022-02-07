@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+import { localValue } from 'helperFunctions/helpers';
 import styles from 'styles/components/itemBox.module.css';
 
 type PropTypes = {
@@ -21,11 +22,7 @@ const ItemBox = ({
   title,
 }: PropTypes): JSX.Element => {
   const value: number = price / 100;
-  const localValue: string = value.toLocaleString('es-ar', {
-    style: 'currency',
-    currency: 'ARS',
-    minimumFractionDigits: 2,
-  });
+  const localCurrency: string = localValue(value);
   const shippingIcon: JSX.Element = (
     <div className={styles.logo}>
       <Image
@@ -42,7 +39,7 @@ const ItemBox = ({
       <Image src={imageUrl} height={180} width={180} alt={'image product'} />
       <div className={styles.middlecontainer}>
         <div className={styles.amountContainer}>
-          <p className={styles.amount}>{localValue}</p>
+          <p className={styles.amount}>{localCurrency}</p>
           {freeShipping && shippingIcon}
         </div>
         <p className={styles.title}>{title}</p>
